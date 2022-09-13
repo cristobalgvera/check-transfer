@@ -10,8 +10,8 @@ import { Link } from '@check/shared-ui';
 export class AppComponent {
   protected appName = this.environmentService.getEnvironment().title;
   protected links: Link[] = [
-    { path: '/add-recipient', title: 'Add Recipient' },
     { path: '/transfer', title: 'Transfer' },
+    { path: '/add-recipient', title: 'Add Recipient' },
     { path: '/history', title: 'History' },
   ];
 
