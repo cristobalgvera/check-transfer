@@ -94,6 +94,32 @@
       },
       "tags": []
     },
+    "shared-ui": {
+      "projectType": "library",
+      "root": "libs/shared-ui",
+      "sourceRoot": "libs/shared-ui/src",
+      "prefix": "check",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared-ui"],
+          "options": {
+            "jestConfig": "libs/shared-ui/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared-ui/**/*.ts",
+              "libs/shared-ui/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "transfer-app": {
       "projectType": "application",
       "root": "apps/transfer-app",

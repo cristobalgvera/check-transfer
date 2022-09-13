@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Message } from '@check/api-interfaces';
+import { EnvironmentService } from './services/environment/environment.service';
+import { Link } from '@check/shared-ui';
 
 @Component({
   selector: 'check-root',
@@ -8,6 +8,12 @@ import { Message } from '@check/api-interfaces';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  hello$ = this.http.get<Message>('/api/hello');
-  constructor(private http: HttpClient) {}
+  protected appName = this.environmentService.getEnvironment().title;
+  protected links: Link[] = [
+    { path: '/add-recipient', title: 'Add Recipient' },
+    { path: '/transfer', title: 'Transfer' },
+    { path: '/history', title: 'History' },
+  ];
+
+  constructor(private readonly environmentService: EnvironmentService) {}
 }

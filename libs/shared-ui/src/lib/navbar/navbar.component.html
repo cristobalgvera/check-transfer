@@ -1,0 +1,30 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <span>{{ appName }}</span>
+    <span class="spacer"></span>
+    <ng-container *ngIf="links.length < 4; else menu">
+      <a
+        mat-button
+        *ngFor="let link of links"
+        routerLinkActive="active"
+        [routerLink]="link.path"
+      >
+        {{ link.title }}
+      </a>
+    </ng-container>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<ng-template #menu>
+  <mat-menu #menu="matMenu">
+    <ng-template matMenuContent>
+      <a mat-menu-item *ngFor="let link of links" [routerLink]="link.path">
+        {{ link.title }}
+      </a>
+    </ng-template>
+  </mat-menu>
+
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+</ng-template>

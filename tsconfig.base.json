@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@check/api-interfaces": ["libs/api-interfaces/src/index.ts"],
-      "@check/material": ["libs/material/src/index.ts"]
+      "@check/material": ["libs/material/src/index.ts"],
+      "@check/shared-ui": ["libs/shared-ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
