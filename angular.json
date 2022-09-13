@@ -88,7 +88,10 @@
               "apps/transfer-app/src/favicon.ico",
               "apps/transfer-app/src/assets"
             ],
-            "styles": ["apps/transfer-app/src/styles.scss"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "apps/transfer-app/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
