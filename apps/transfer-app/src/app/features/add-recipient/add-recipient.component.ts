@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'check-add-recipient',
+  selector: 'app-add-recipient',
   templateUrl: './add-recipient.component.html',
   styleUrls: ['./add-recipient.component.scss'],
 })

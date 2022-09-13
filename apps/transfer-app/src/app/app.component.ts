@@ -3,7 +3,7 @@ import { EnvironmentService } from './services/environment/environment.service';
 import { Link } from '@check/shared-ui';
 
 @Component({
-  selector: 'check-root',
+  selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
