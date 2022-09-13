@@ -12,7 +12,7 @@ export class AppComponent {
   protected links: Link[] = [
     { path: '/transfer', title: 'Transfer' },
     { path: '/add-recipient', title: 'Add Recipient' },
-    { path: '/history', title: 'History' },
+    { path: '/transfer-history', title: 'History' },
   ];
 
   constructor(private readonly environmentService: EnvironmentService) {}

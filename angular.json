@@ -124,7 +124,7 @@
       "projectType": "application",
       "root": "apps/transfer-app",
       "sourceRoot": "apps/transfer-app/src",
-      "prefix": "check",
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",

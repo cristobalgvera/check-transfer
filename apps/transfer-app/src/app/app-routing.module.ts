@@ -17,9 +17,11 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'history',
+    path: 'transfer-history',
     loadChildren: () =>
-      import('./features/history/history.module').then((m) => m.HistoryModule),
+      import('./features/transfer-history/transfer-history.module').then(
+        (m) => m.TransferHistoryModule
+      ),
   },
 ];
 
