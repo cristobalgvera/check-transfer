@@ -10,6 +10,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
+import {
+  MAT_FORM_FIELD_DEFAULT_OPTIONS,
+  MatFormFieldDefaultOptions,
+} from '@angular/material/form-field';
 
 @NgModule({
   imports: [
@@ -37,6 +41,14 @@ import { MatSelectModule } from '@angular/material/select';
     MatMenuModule,
     MatTableModule,
     MatSelectModule,
+  ],
+  providers: [
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: <MatFormFieldDefaultOptions>{
+        appearance: 'outline',
+      },
+    },
   ],
 })
 export class MaterialModule {}
