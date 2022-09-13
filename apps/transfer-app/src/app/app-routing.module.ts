@@ -1,23 +1,25 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
     path: 'add-recipient',
     loadChildren: () =>
-      import('./pages/add-recipient/add-recipient.module').then(
+      import('./features/add-recipient/add-recipient.module').then(
         (m) => m.AddRecipientModule
       ),
   },
   {
     path: 'transfer',
     loadChildren: () =>
-      import('./pages/transfer/transfer.module').then((m) => m.TransferModule),
+      import('./features/transfer/transfer.module').then(
+        (m) => m.TransferModule
+      ),
   },
   {
     path: 'history',
     loadChildren: () =>
-      import('./pages/history/history.module').then((m) => m.HistoryModule),
+      import('./features/history/history.module').then((m) => m.HistoryModule),
   },
 ];
 
