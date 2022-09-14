@@ -1,4 +1,4 @@
-export interface AddRecipient {
+export interface RecipientModel {
   name: string;
   rut: string;
   email: string;

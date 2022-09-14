@@ -7,11 +7,15 @@ import {
   Validators,
 } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { AccountType, AddRecipient, Bank } from '@check/shared/models';
+import {
+  BankModel,
+  CreateRecipientModel,
+  GetAccountTypeModel,
+} from '@check/shared/models';
 import { BankService } from '../services/bank/bank.service';
 
 type AddRecipientForm = FormGroup<{
-  [key in keyof AddRecipient]: FormControl<AddRecipient[key]>;
+  [key in keyof CreateRecipientModel]: FormControl<CreateRecipientModel[key]>;
 }>;
 
 type AddRecipientFormControlName = keyof AddRecipientForm['controls'];
@@ -25,8 +29,8 @@ type ValidationErrorName = keyof typeof Validators;
 })
 export class AddRecipientFormComponent implements OnInit {
   protected addRecipientForm!: AddRecipientForm;
-  protected banks$: Observable<Bank[]>;
-  protected accountTypes$: Observable<AccountType[]>;
+  protected banks$: Observable<BankModel[]>;
+  protected accountTypes$: Observable<GetAccountTypeModel[]>;
 
   constructor(
     private readonly formBuilder: FormBuilder,
