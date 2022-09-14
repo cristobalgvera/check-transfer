@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/client/material/src",
+  "prefix": "material",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/client/material"],
+      "options": {
+        "jestConfig": "libs/client/material/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/client/material/**/*.ts",
+          "libs/client/material/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

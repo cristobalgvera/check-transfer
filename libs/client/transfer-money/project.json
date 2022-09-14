@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/client/transfer-money/src",
+  "prefix": "app",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/client/transfer-money"],
+      "options": {
+        "jestConfig": "libs/client/transfer-money/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/client/transfer-money/**/*.ts",
+          "libs/client/transfer-money/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

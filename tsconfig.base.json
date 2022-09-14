@@ -16,7 +16,6 @@
     "baseUrl": ".",
     "paths": {
       "@check/client/add-recipient": ["libs/client/add-recipient/src/index.ts"],
-      "@check/shared/models": ["libs/shared/models/src/index.ts"],
       "@check/client/material": ["libs/client/material/src/index.ts"],
       "@check/client/shared-ui": ["libs/client/shared-ui/src/index.ts"],
       "@check/client/transfer-history": [
@@ -24,7 +23,8 @@
       ],
       "@check/client/transfer-money": [
         "libs/client/transfer-money/src/index.ts"
-      ]
+      ],
+      "@check/shared/models": ["libs/shared/models/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
