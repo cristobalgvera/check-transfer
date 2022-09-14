@@ -12,7 +12,7 @@ import {
   CreateRecipientModel,
   GetAccountTypeModel,
 } from '@check/shared/models';
-import { BankService } from '../services/bank/bank.service';
+import { AccountTypeService, BankService } from '@check/client/shared-services';
 
 type AddRecipientForm = FormGroup<{
   [key in keyof CreateRecipientModel]: FormControl<CreateRecipientModel[key]>;
@@ -34,10 +34,11 @@ export class AddRecipientFormComponent implements OnInit {
 
   constructor(
     private readonly formBuilder: FormBuilder,
-    private readonly bankService: BankService
+    private readonly bankService: BankService,
+    private readonly accountTypeService: AccountTypeService
   ) {
     this.banks$ = this.bankService.getBanks();
-    this.accountTypes$ = this.bankService.getAccountTypes();
+    this.accountTypes$ = this.accountTypeService.getAccountTypes();
   }
 
   ngOnInit(): void {
