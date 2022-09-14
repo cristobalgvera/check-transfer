@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BankModel } from '@check/shared/models';
-import { catchError, Observable, of, shareReplay } from 'rxjs';
+import { catchError, Observable, shareReplay } from 'rxjs';
 import { BaseHttpService } from '../shared/base-http.service';
 
 @Injectable({
@@ -11,10 +11,7 @@ export class BankService extends BaseHttpService {
 
   getBanks(): Observable<BankModel[]> {
     return this.get<BankModel[]>(this.BASE_PATH).pipe(
-      catchError((error) => {
-        console.error(error);
-        return of([]);
-      }),
+      catchError(this.handleError()),
       shareReplay(1)
     );
   }

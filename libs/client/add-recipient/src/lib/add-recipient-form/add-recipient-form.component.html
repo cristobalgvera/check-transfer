@@ -1,5 +1,9 @@
 <div class="container">
-  <form [formGroup]="addRecipientForm" class="form" (ngSubmit)="handleSubmit()">
+  <form
+    [formGroup]="addRecipientFormGroup"
+    class="form"
+    (keyup.enter)="addRecipientFormGroup.valid && handleSubmit()"
+  >
     <mat-form-field hideRequiredMarker>
       <mat-label>RUT</mat-label>
       <input matInput formControlName="rut" required />
@@ -75,10 +79,11 @@
     <div class="form-actions">
       <button
         mat-raised-button
-        type="submit"
+        type="button"
         class="submit-button"
         color="primary"
-        [disabled]="addRecipientForm.invalid"
+        (click)="handleSubmit()"
+        [disabled]="addRecipientFormGroup.invalid"
       >
         Add
       </button>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { catchError, Observable, of, shareReplay } from 'rxjs';
+import { catchError, Observable, shareReplay } from 'rxjs';
 import { GetAccountTypeModel } from '@check/shared/models';
 import { BaseHttpService } from '../shared/base-http.service';
 
@@ -11,10 +11,7 @@ export class AccountTypeService extends BaseHttpService {
 
   getAccountTypes(): Observable<GetAccountTypeModel[]> {
     return this.get<GetAccountTypeModel[]>(this.BASE_PATH).pipe(
-      catchError((error) => {
-        console.error(error);
-        return of([]);
-      }),
+      catchError(this.handleError()),
       shareReplay(1)
     );
   }

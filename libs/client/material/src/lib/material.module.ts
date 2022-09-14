@@ -16,6 +16,11 @@ import {
 } from '@angular/material/form-field';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import {
+  MAT_SNACK_BAR_DEFAULT_OPTIONS,
+  MatSnackBarConfig,
+  MatSnackBarModule,
+} from '@angular/material/snack-bar';
 
 @NgModule({
   imports: [
@@ -32,6 +37,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatTableModule,
     MatSelectModule,
     MatAutocompleteModule,
+    MatSnackBarModule,
   ],
   exports: [
     LayoutModule,
@@ -47,12 +53,20 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatTableModule,
     MatSelectModule,
     MatAutocompleteModule,
+    MatSnackBarModule,
   ],
   providers: [
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: <MatFormFieldDefaultOptions>{
         appearance: 'outline',
+      },
+    },
+    {
+      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+      useValue: <MatSnackBarConfig>{
+        duration: 5000,
+        horizontalPosition: 'right',
       },
     },
   ],

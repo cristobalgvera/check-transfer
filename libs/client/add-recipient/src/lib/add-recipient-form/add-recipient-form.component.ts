@@ -19,11 +19,11 @@ import {
   GetAccountTypeModel,
 } from '@check/shared/models';
 
-type AddRecipientForm = FormGroup<{
+type AddRecipientFormGroup = FormGroup<{
   [key in keyof CreateRecipientModel]: FormControl<CreateRecipientModel[key]>;
 }>;
 
-type AddRecipientFormControlName = keyof AddRecipientForm['controls'];
+type AddRecipientFormControlName = keyof AddRecipientFormGroup['controls'];
 type ValidationErrorName = keyof typeof Validators;
 
 @Component({
@@ -38,12 +38,12 @@ export class AddRecipientFormComponent implements OnInit {
 
   @Output() createRecipient = new EventEmitter<CreateRecipientModel>();
 
-  protected addRecipientForm!: AddRecipientForm;
+  protected addRecipientFormGroup!: AddRecipientFormGroup;
 
   constructor(private readonly formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
-    this.addRecipientForm = this.formBuilder.nonNullable.group({
+    this.addRecipientFormGroup = this.formBuilder.nonNullable.group({
       name: this.commonControl(''),
       rut: this.commonControl('', Validators.pattern(/^[0-9]{7,8}-[0-9kK]$/)),
       email: this.commonControl('', Validators.email),
@@ -54,11 +54,15 @@ export class AddRecipientFormComponent implements OnInit {
     });
   }
 
-  protected handleSubmit(): void {
-    if (this.addRecipientForm.invalid)
-      return this.addRecipientForm.markAllAsTouched();
+  resetForm(): void {
+    this.addRecipientFormGroup.reset();
+  }
 
-    const createRecipientModel = this.addRecipientForm
+  protected handleSubmit(): void {
+    if (this.addRecipientFormGroup.invalid)
+      return this.addRecipientFormGroup.markAllAsTouched();
+
+    const createRecipientModel = this.addRecipientFormGroup
       .value as CreateRecipientModel;
 
     this.createRecipient.emit(createRecipientModel);
@@ -68,7 +72,9 @@ export class AddRecipientFormComponent implements OnInit {
     controlName: AddRecipientFormControlName,
     errorName: ValidationErrorName
   ): boolean {
-    return this.addRecipientForm.get(controlName)?.hasError(errorName) ?? false;
+    const control = this.addRecipientFormGroup.get(controlName);
+
+    return control?.hasError(errorName) ?? false;
   }
 
   private commonControl<T>(
