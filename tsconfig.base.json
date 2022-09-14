@@ -24,6 +24,7 @@
       "@check/client/transfer-money": [
         "libs/client/transfer-money/src/index.ts"
       ],
+      "@check/server/bank": ["libs/server/bank/src/index.ts"],
       "@check/shared/models": ["libs/shared/models/src/index.ts"]
     }
   },
