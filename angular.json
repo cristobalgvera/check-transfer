@@ -6,6 +6,7 @@
     "material": "libs/client/material",
     "models": "libs/shared/models",
     "server-bank": "libs/server/bank",
+    "server-recipient": "libs/server/recipient",
     "shared-ui": "libs/client/shared-ui",
     "transfer-app": "apps/transfer-app",
     "transfer-app-e2e": "apps/transfer-app-e2e",
