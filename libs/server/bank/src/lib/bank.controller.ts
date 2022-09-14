@@ -11,4 +11,9 @@ export class BankController {
   getBanks(): Observable<Bank[]> {
     return this.bankService.getBanks();
   }
+
+  @Get('account-types')
+  getAccountTypes(): Observable<Bank[]> {
+    return this.bankService.getAccountTypes();
+  }
 }

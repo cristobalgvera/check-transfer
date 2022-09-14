@@ -1,7 +1,7 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import { Bank } from '@check/shared/models';
+import { AccountType, Bank } from '@check/shared/models';
 import { HttpService } from '@nestjs/axios';
-import { catchError, map, Observable } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 
 type BankResponse = {
   banks: Bank[];
@@ -23,5 +23,18 @@ export class BankService {
       }),
       map((response) => response.data.banks)
     );
+  }
+
+  getAccountTypes(): Observable<AccountType[]> {
+    return of([
+      {
+        id: '1',
+        name: 'Checking',
+      },
+      {
+        id: '2',
+        name: 'Savings',
+      },
+    ]);
   }
 }
