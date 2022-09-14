@@ -14,9 +14,11 @@ import {
   MAT_FORM_FIELD_DEFAULT_OPTIONS,
   MatFormFieldDefaultOptions,
 } from '@angular/material/form-field';
+import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
   imports: [
+    LayoutModule,
     MatInputModule,
     MatCardModule,
     MatButtonModule,
@@ -30,6 +32,7 @@ import {
     MatSelectModule,
   ],
   exports: [
+    LayoutModule,
     MatInputModule,
     MatCardModule,
     MatButtonModule,

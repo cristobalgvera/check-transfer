@@ -1,30 +1,54 @@
-<mat-toolbar>
-  <mat-toolbar-row>
-    <span>{{ appName }}</span>
-    <span class="spacer"></span>
-    <ng-container *ngIf="links.length < 4; else menu">
+<header class="container">
+  <ng-container *ngIf="{ isSmallScreen: isSmallScreen$ | async } as aux">
+    <mat-toolbar color="primary" class="toolbar">
+      <h1>{{ appName }}</h1>
+      <span class="space"></span>
+      <div class="nav-items" *ngIf="!aux.isSmallScreen; else navMenu">
+        <a
+          mat-button
+          *ngFor="let link of links"
+          routerLink="{{ link.path }}"
+          routerLinkActive="active"
+        >
+          <ng-container
+            *ngTemplateOutlet="navItem; context: { link: link }"
+          ></ng-container>
+        </a>
+      </div>
+    </mat-toolbar>
+  </ng-container>
+</header>
+
+<ng-template #navMenu>
+  <div>
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      aria-label="Menu"
+      aria-haspopup="true"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu>
       <a
-        mat-button
+        mat-menu-item
         *ngFor="let link of links"
+        routerLink="{{ link.path }}"
         routerLinkActive="active"
-        [routerLink]="link.path"
       >
-        {{ link.title }}
+        <ng-container
+          *ngTemplateOutlet="navItem; context: { link: link }"
+        ></ng-container>
       </a>
-    </ng-container>
-  </mat-toolbar-row>
-</mat-toolbar>
+    </mat-menu>
+  </div>
+</ng-template>
 
-<ng-template #menu>
-  <mat-menu #menu="matMenu">
-    <ng-template matMenuContent>
-      <a mat-menu-item *ngFor="let link of links" [routerLink]="link.path">
-        {{ link.title }}
-      </a>
-    </ng-template>
-  </mat-menu>
-
-  <button mat-icon-button [matMenuTriggerFor]="menu">
-    <mat-icon>more_vert</mat-icon>
-  </button>
+<ng-template #navItem let-link="link">
+  <div class="nav-item">
+    <mat-icon inline aria-hidden="false">{{ link.icon }}</mat-icon>
+    <span>
+      {{ link.title }}
+    </span>
+  </div>
 </ng-template>

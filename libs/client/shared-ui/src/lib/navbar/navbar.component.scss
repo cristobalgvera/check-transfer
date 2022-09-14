@@ -1,7 +1,25 @@
-.spacer {
+.toolbar {
+  padding: 0 2rem;
+}
+
+.space {
   flex: 1 1 auto;
 }
 
+.nav-items {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .active {
-  background-color: #ddd;
+  background: rgba(0, 0, 0, 0.2);
 }

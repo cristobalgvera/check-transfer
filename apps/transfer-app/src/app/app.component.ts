@@ -10,9 +10,9 @@ import { EnvironmentService } from './services/environment/environment.service';
 export class AppComponent {
   protected appName = this.environmentService.getEnvironment().title;
   protected links: NavbarLink[] = [
-    { path: '/transfer-money', title: 'Transfer' },
-    { path: '/add-recipient', title: 'Add Recipient' },
-    { path: '/transfer-history', title: 'History' },
+    { path: '/transfer-money', title: 'Transfer', icon: 'currency_exchange' },
+    { path: '/add-recipient', title: 'Add Recipient', icon: 'person_add' },
+    { path: '/transfer-history', title: 'History', icon: 'payments' },
   ];
 
   constructor(private readonly environmentService: EnvironmentService) {}
