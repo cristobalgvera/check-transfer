@@ -17,7 +17,7 @@ import { NavbarLink } from './model';
 })
 export class NavbarComponent implements OnInit {
   @Input() appName!: Readonly<string>;
-  @Input() links!: Readonly<NavbarLink[]>;
+  @Input() links!: ReadonlyArray<NavbarLink>;
 
   protected isSmallScreen$!: Observable<boolean>;
 
