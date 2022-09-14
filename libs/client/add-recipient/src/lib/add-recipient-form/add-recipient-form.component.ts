@@ -6,8 +6,8 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { AddRecipient, Bank } from '@check/shared/models';
+import { Observable } from 'rxjs';
+import { AccountType, AddRecipient, Bank } from '@check/shared/models';
 import { BankService } from '../services/bank/bank.service';
 
 type AddRecipientForm = FormGroup<{
@@ -26,13 +26,14 @@ type ValidationErrorName = keyof typeof Validators;
 export class AddRecipientFormComponent implements OnInit {
   protected addRecipientForm!: AddRecipientForm;
   protected banks$: Observable<Bank[]>;
-  protected accountTypes$ = new BehaviorSubject([{ name: 'Cuenta Corriente' }]);
+  protected accountTypes$: Observable<AccountType[]>;
 
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly bankService: BankService
   ) {
     this.banks$ = this.bankService.getBanks();
+    this.accountTypes$ = this.bankService.getAccountTypes();
   }
 
   ngOnInit(): void {

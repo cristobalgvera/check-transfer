@@ -38,7 +38,8 @@
     <mat-form-field hideRequiredMarker>
       <mat-label>Bank</mat-label>
       <mat-select formControlName="bank" required>
-        <mat-option *ngFor="let bank of banks$ | async" [value]="bank.name">
+        <mat-option disabled>Select one</mat-option>
+        <mat-option *ngFor="let bank of banks$ | async" [value]="bank.id">
           {{ bank.name }}
         </mat-option>
       </mat-select>
@@ -49,9 +50,10 @@
     <mat-form-field hideRequiredMarker>
       <mat-label>Account Type</mat-label>
       <mat-select formControlName="accountType" required>
+        <mat-option disabled>Select one</mat-option>
         <mat-option
           *ngFor="let accountType of accountTypes$ | async"
-          [value]="accountType.name"
+          [value]="accountType.id"
         >
           {{ accountType.name }}
         </mat-option>
