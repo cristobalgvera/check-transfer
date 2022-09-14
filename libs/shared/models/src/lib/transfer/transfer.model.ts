@@ -1,10 +1,12 @@
 import { RecipientModel } from '../recipient';
 
+export type TransferModelDestination = Pick<
+  RecipientModel,
+  'name' | 'rut' | 'bank' | 'accountType' | 'accountNumber'
+>;
+
 export interface TransferModel {
   origin: string;
-  destination: Pick<
-    RecipientModel,
-    'name' | 'rut' | 'bank' | 'accountType' | 'accountNumber'
-  >;
+  destination: TransferModelDestination;
   amount: number;
 }
