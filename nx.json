@@ -1,4 +1,5 @@
 {
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "npmScope": "check",
   "affected": {
     "defaultBase": "main"
@@ -19,7 +20,6 @@
       }
     }
   },
-  "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "cli": {
     "packageManager": "yarn",
     "defaultCollection": "@nrwl/angular"

@@ -3,15 +3,15 @@
   "projects": {
     "add-recipient": {
       "projectType": "library",
-      "root": "libs/add-recipient",
-      "sourceRoot": "libs/add-recipient/src",
+      "root": "libs/client/add-recipient",
+      "sourceRoot": "libs/client/add-recipient/src",
       "prefix": "app",
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/add-recipient"],
+          "outputs": ["coverage/libs/client/add-recipient"],
           "options": {
-            "jestConfig": "libs/add-recipient/jest.config.ts",
+            "jestConfig": "libs/client/add-recipient/jest.config.ts",
             "passWithNoTests": true
           }
         },
@@ -19,8 +19,8 @@
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "libs/add-recipient/**/*.ts",
-              "libs/add-recipient/**/*.html"
+              "libs/client/add-recipient/**/*.ts",
+              "libs/client/add-recipient/**/*.html"
             ]
           }
         }
@@ -79,16 +79,16 @@
       },
       "tags": []
     },
-    "api-interfaces": {
-      "root": "libs/api-interfaces",
-      "sourceRoot": "libs/api-interfaces/src",
+    "models": {
+      "root": "libs/shared/models",
+      "sourceRoot": "libs/shared/models/src",
       "projectType": "library",
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": ["libs/api-interfaces/**/*.ts"]
+            "lintFilePatterns": ["libs/shared/models/**/*.ts"]
           }
         }
       },
@@ -96,15 +96,15 @@
     },
     "material": {
       "projectType": "library",
-      "root": "libs/material",
-      "sourceRoot": "libs/material/src",
+      "root": "libs/client/material",
+      "sourceRoot": "libs/client/material/src",
       "prefix": "material",
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/material"],
+          "outputs": ["coverage/libs/client/material"],
           "options": {
-            "jestConfig": "libs/material/jest.config.ts",
+            "jestConfig": "libs/client/material/jest.config.ts",
             "passWithNoTests": true
           }
         },
@@ -112,8 +112,8 @@
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "libs/material/**/*.ts",
-              "libs/material/**/*.html"
+              "libs/client/material/**/*.ts",
+              "libs/client/material/**/*.html"
             ]
           }
         }
@@ -122,15 +122,15 @@
     },
     "shared-ui": {
       "projectType": "library",
-      "root": "libs/shared-ui",
-      "sourceRoot": "libs/shared-ui/src",
+      "root": "libs/client/shared-ui",
+      "sourceRoot": "libs/client/shared-ui/src",
       "prefix": "app",
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared-ui"],
+          "outputs": ["coverage/libs/client/shared-ui"],
           "options": {
-            "jestConfig": "libs/shared-ui/jest.config.ts",
+            "jestConfig": "libs/client/shared-ui/jest.config.ts",
             "passWithNoTests": true
           }
         },
@@ -138,8 +138,8 @@
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "libs/shared-ui/**/*.ts",
-              "libs/shared-ui/**/*.html"
+              "libs/client/shared-ui/**/*.ts",
+              "libs/client/shared-ui/**/*.html"
             ]
           }
         }
@@ -277,15 +277,15 @@
     },
     "transfer-history": {
       "projectType": "library",
-      "root": "libs/transfer-history",
-      "sourceRoot": "libs/transfer-history/src",
+      "root": "libs/client/transfer-history",
+      "sourceRoot": "libs/client/transfer-history/src",
       "prefix": "app",
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/transfer-history"],
+          "outputs": ["coverage/libs/client/transfer-history"],
           "options": {
-            "jestConfig": "libs/transfer-history/jest.config.ts",
+            "jestConfig": "libs/client/transfer-history/jest.config.ts",
             "passWithNoTests": true
           }
         },
@@ -293,8 +293,8 @@
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "libs/transfer-history/**/*.ts",
-              "libs/transfer-history/**/*.html"
+              "libs/client/transfer-history/**/*.ts",
+              "libs/client/transfer-history/**/*.html"
             ]
           }
         }
@@ -303,15 +303,15 @@
     },
     "transfer-money": {
       "projectType": "library",
-      "root": "libs/transfer-money",
-      "sourceRoot": "libs/transfer-money/src",
+      "root": "libs/client/transfer-money",
+      "sourceRoot": "libs/client/transfer-money/src",
       "prefix": "app",
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/transfer-money"],
+          "outputs": ["coverage/libs/client/transfer-money"],
           "options": {
-            "jestConfig": "libs/transfer-money/jest.config.ts",
+            "jestConfig": "libs/client/transfer-money/jest.config.ts",
             "passWithNoTests": true
           }
         },
@@ -319,8 +319,8 @@
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "libs/transfer-money/**/*.ts",
-              "libs/transfer-money/**/*.html"
+              "libs/client/transfer-money/**/*.ts",
+              "libs/client/transfer-money/**/*.html"
             ]
           }
         }

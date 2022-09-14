@@ -5,17 +5,19 @@ const routes: Routes = [
   {
     path: 'add-recipient',
     loadChildren: () =>
-      import('@check/add-recipient').then((m) => m.AddRecipientModule),
+      import('@check/client/add-recipient').then((m) => m.AddRecipientModule),
   },
   {
     path: 'transfer-money',
     loadChildren: () =>
-      import('@check/transfer-money').then((m) => m.TransferMoneyModule),
+      import('@check/client/transfer-money').then((m) => m.TransferMoneyModule),
   },
   {
     path: 'transfer-history',
     loadChildren: () =>
-      import('@check/transfer-history').then((m) => m.TransferHistoryModule),
+      import('@check/client/transfer-history').then(
+        (m) => m.TransferHistoryModule
+      ),
   },
 ];
 
