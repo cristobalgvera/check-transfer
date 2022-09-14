@@ -2,5 +2,5 @@ import { RecipientModel } from './recipient.model';
 
 export type GetRecipientModel = Pick<
   RecipientModel,
-  'name' | 'accountType' | 'email' | 'bank'
+  'bank' | 'accountNumber' | 'accountType' | 'name' | 'rut' | 'email'
 >;

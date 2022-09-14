@@ -5,4 +5,6 @@ export class GetRecipientDto implements GetRecipientModel {
   bank!: string;
   email!: string;
   name!: string;
+  accountNumber!: string;
+  rut!: string;
 }

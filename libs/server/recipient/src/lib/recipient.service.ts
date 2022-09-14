@@ -17,10 +17,12 @@ export class RecipientService {
     return of(this.recipients).pipe(
       map((recipients) =>
         recipients.map((recipient) => ({
-          name: recipient.name,
-          accountType: recipient.accountType,
-          email: recipient.email,
           bank: recipient.bank,
+          accountNumber: recipient.accountNumber,
+          accountType: recipient.accountType,
+          name: recipient.name,
+          rut: recipient.rut,
+          email: recipient.email,
         }))
       )
     );
