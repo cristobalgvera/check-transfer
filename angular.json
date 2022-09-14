@@ -1,6 +1,32 @@
 {
   "version": 1,
   "projects": {
+    "add-recipient": {
+      "projectType": "library",
+      "root": "libs/add-recipient",
+      "sourceRoot": "libs/add-recipient/src",
+      "prefix": "app",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/add-recipient"],
+          "options": {
+            "jestConfig": "libs/add-recipient/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/add-recipient/**/*.ts",
+              "libs/add-recipient/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "api": {
       "root": "apps/api",
       "sourceRoot": "apps/api/src",
@@ -248,6 +274,58 @@
       },
       "tags": [],
       "implicitDependencies": ["transfer-app"]
+    },
+    "transfer-history": {
+      "projectType": "library",
+      "root": "libs/transfer-history",
+      "sourceRoot": "libs/transfer-history/src",
+      "prefix": "app",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/transfer-history"],
+          "options": {
+            "jestConfig": "libs/transfer-history/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/transfer-history/**/*.ts",
+              "libs/transfer-history/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "transfer-money": {
+      "projectType": "library",
+      "root": "libs/transfer-money",
+      "sourceRoot": "libs/transfer-money/src",
+      "prefix": "app",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/transfer-money"],
+          "options": {
+            "jestConfig": "libs/transfer-money/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/transfer-money/**/*.ts",
+              "libs/transfer-money/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
     }
   }
 }

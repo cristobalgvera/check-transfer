@@ -15,9 +15,12 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@check/add-recipient": ["libs/add-recipient/src/index.ts"],
       "@check/api-interfaces": ["libs/api-interfaces/src/index.ts"],
       "@check/material": ["libs/material/src/index.ts"],
-      "@check/shared-ui": ["libs/shared-ui/src/index.ts"]
+      "@check/shared-ui": ["libs/shared-ui/src/index.ts"],
+      "@check/transfer-history": ["libs/transfer-history/src/index.ts"],
+      "@check/transfer-money": ["libs/transfer-money/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

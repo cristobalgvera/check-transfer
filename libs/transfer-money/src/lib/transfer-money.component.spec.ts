@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TransferComponent } from './transfer.component';
+import { TransferMoneyComponent } from './transfer-money.component';
 
-describe('TransferComponent', () => {
-  let component: TransferComponent;
-  let fixture: ComponentFixture<TransferComponent>;
+describe('TransferMoneyComponent', () => {
+  let component: TransferMoneyComponent;
+  let fixture: ComponentFixture<TransferMoneyComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TransferComponent],
+      declarations: [TransferMoneyComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TransferComponent);
+    fixture = TestBed.createComponent(TransferMoneyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
