@@ -1,5 +1,5 @@
 <div class="container">
-  <form [formGroup]="addRecipientForm" class="form" (ngSubmit)="addRecipient()">
+  <form [formGroup]="addRecipientForm" class="form" (ngSubmit)="handleSubmit()">
     <mat-form-field hideRequiredMarker>
       <mat-label>RUT</mat-label>
       <input matInput formControlName="rut" required />
@@ -64,7 +64,7 @@
     </mat-form-field>
     <mat-form-field hideRequiredMarker>
       <mat-label>Account Number</mat-label>
-      <input matInput formControlName="accountNumber" type="number" required />
+      <input matInput formControlName="accountNumber" required />
       <mat-error *ngIf="hasError('accountNumber', 'required')">
         Account number is required
       </mat-error>

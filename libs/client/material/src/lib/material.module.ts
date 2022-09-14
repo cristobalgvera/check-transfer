@@ -15,6 +15,7 @@ import {
   MatFormFieldDefaultOptions,
 } from '@angular/material/form-field';
 import { LayoutModule } from '@angular/cdk/layout';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatMenuModule,
     MatTableModule,
     MatSelectModule,
+    MatAutocompleteModule,
   ],
   exports: [
     LayoutModule,
@@ -44,6 +46,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatMenuModule,
     MatTableModule,
     MatSelectModule,
+    MatAutocompleteModule,
   ],
   providers: [
     {

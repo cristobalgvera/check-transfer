@@ -6,7 +6,7 @@ type HttpOptions = Parameters<HttpClient['get']>[1];
 
 @Injectable()
 export abstract class BaseHttpService {
-  protected abstract readonly BASE_URL: string;
+  protected abstract readonly BASE_PATH: string;
 
   constructor(private readonly http: HttpClient) {}
 

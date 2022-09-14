@@ -1,8 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   Input,
   OnInit,
+  Output,
 } from '@angular/core';
 import {
   FormBuilder,
@@ -34,6 +36,8 @@ export class AddRecipientFormComponent implements OnInit {
   @Input() banks: ReadonlyArray<BankModel> = [];
   @Input() accountTypes: ReadonlyArray<GetAccountTypeModel> = [];
 
+  @Output() createRecipient = new EventEmitter<CreateRecipientModel>();
+
   protected addRecipientForm!: AddRecipientForm;
 
   constructor(private readonly formBuilder: FormBuilder) {}
@@ -50,8 +54,14 @@ export class AddRecipientFormComponent implements OnInit {
     });
   }
 
-  protected addRecipient() {
-    alert(JSON.stringify(this.addRecipientForm.value));
+  protected handleSubmit(): void {
+    if (this.addRecipientForm.invalid)
+      return this.addRecipientForm.markAllAsTouched();
+
+    const createRecipientModel = this.addRecipientForm
+      .value as CreateRecipientModel;
+
+    this.createRecipient.emit(createRecipientModel);
   }
 
   protected hasError(

@@ -3,4 +3,5 @@
 <app-add-recipient-form
   [accountTypes]="(accountTypes$ | async) ?? []"
   [banks]="(banks$ | async) ?? []"
+  (createRecipient)="createRecipient($event)"
 ></app-add-recipient-form>

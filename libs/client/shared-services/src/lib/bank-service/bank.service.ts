@@ -7,10 +7,10 @@ import { BaseHttpService } from '../shared/base-http.service';
   providedIn: 'root',
 })
 export class BankService extends BaseHttpService {
-  protected readonly BASE_URL = '/api/v1/banks';
+  protected readonly BASE_PATH = '/api/v1/banks';
 
   getBanks(): Observable<BankModel[]> {
-    return this.get<BankModel[]>(this.BASE_URL).pipe(
+    return this.get<BankModel[]>(this.BASE_PATH).pipe(
       catchError((error) => {
         console.error(error);
         return of([]);
