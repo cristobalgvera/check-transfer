@@ -30,6 +30,7 @@
       "@check/server/account-type": ["libs/server/account-type/src/index.ts"],
       "@check/server/bank": ["libs/server/bank/src/index.ts"],
       "@check/server/recipient": ["libs/server/recipient/src/index.ts"],
+      "@check/server/shared-dtos": ["libs/server/shared-dtos/src/index.ts"],
       "@check/shared/models": ["libs/shared/models/src/index.ts"]
     }
   },

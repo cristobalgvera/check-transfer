@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateRecipientModel, RecipientModel } from '@check/shared/models';
 import { map, Observable, of } from 'rxjs';
-import { GetRecipientDto } from './dto/get-recipient.dto';
+import { GetRecipientDto } from '@check/server/shared-dtos';
 
 @Injectable()
 export class RecipientService {

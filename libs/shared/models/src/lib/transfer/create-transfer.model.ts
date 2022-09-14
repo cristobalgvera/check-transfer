@@ -1,5 +1,5 @@
 import { TransferModel } from './transfer.model';
 
 export type CreateTransferModel = Pick<TransferModel, 'origin' | 'amount'> & {
-  destination: TransferModel['destination']['accountNumber'];
+  accountNumber: TransferModel['destination']['accountNumber'];
 };

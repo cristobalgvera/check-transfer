@@ -1,1 +1,5 @@
-<p>transfer-money works!</p>
+<div class="container">
+  <app-transfer-money-form
+    [recipients]="(recipients$ | async) ?? []"
+  ></app-transfer-money-form>
+</div>

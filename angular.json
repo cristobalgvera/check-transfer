@@ -9,6 +9,7 @@
     "server-account-type": "libs/server/account-type",
     "server-bank": "libs/server/bank",
     "server-recipient": "libs/server/recipient",
+    "server-shared-dtos": "libs/server/shared-dtos",
     "shared-ui": "libs/client/shared-ui",
     "transfer-app": "apps/transfer-app",
     "transfer-app-e2e": "apps/transfer-app-e2e",

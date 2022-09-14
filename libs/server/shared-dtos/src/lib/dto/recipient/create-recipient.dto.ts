@@ -1,5 +1,12 @@
 import { CreateRecipientModel } from '@check/shared/models';
-import { IsEmail, IsNotEmpty, IsNumberString } from 'class-validator';
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsNumberString,
+  ValidateNested,
+} from 'class-validator';
+import { CreateBankDto } from '../bank/create-bank.dto';
+import { Type } from 'class-transformer';
 
 export class CreateRecipientDto implements CreateRecipientModel {
   @IsNumberString()
@@ -8,8 +15,9 @@ export class CreateRecipientDto implements CreateRecipientModel {
   @IsNotEmpty()
   accountType!: string;
 
-  @IsNotEmpty()
-  bank!: string;
+  @ValidateNested()
+  @Type(() => CreateBankDto)
+  bank!: CreateBankDto;
 
   @IsEmail()
   email!: string;

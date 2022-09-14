@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { GetAccountTypeDto } from './dto/get-account-type.dto';
 import { Observable, of } from 'rxjs';
+import { GetAccountTypeDto } from '@check/server/shared-dtos';
 
 @Injectable()
 export class AccountTypeService {

@@ -19,9 +19,15 @@ import {
   GetAccountTypeModel,
 } from '@check/shared/models';
 
-type AddRecipientFormGroup = FormGroup<{
-  [key in keyof CreateRecipientModel]: FormControl<CreateRecipientModel[key]>;
-}>;
+type AddRecipientFormGroup = FormGroup<
+  {
+    [key in keyof Omit<CreateRecipientModel, 'bank'>]: FormControl<
+      CreateRecipientModel[key]
+    >;
+  } & {
+    bankId: FormControl<CreateRecipientModel['bank']['id']>;
+  }
+>;
 
 type AddRecipientFormControlName = keyof AddRecipientFormGroup['controls'];
 type ValidationErrorName = keyof typeof Validators;
@@ -48,7 +54,7 @@ export class AddRecipientFormComponent implements OnInit {
       rut: this.commonControl('', Validators.pattern(/^[0-9]{7,8}-[0-9kK]$/)),
       email: this.commonControl('', Validators.email),
       phone: this.commonControl('', Validators.pattern(/^\+?[0-9]{8,11}$/)),
-      bank: this.commonControl(''),
+      bankId: this.commonControl(''),
       accountType: this.commonControl(''),
       accountNumber: this.commonControl('', Validators.pattern(/^[0-9]+$/)),
     });
@@ -62,10 +68,31 @@ export class AddRecipientFormComponent implements OnInit {
     if (this.addRecipientFormGroup.invalid)
       return this.addRecipientFormGroup.markAllAsTouched();
 
-    const createRecipientModel = this.addRecipientFormGroup
-      .value as CreateRecipientModel;
+    const createRecipientModel = this.parseRecipientModel(
+      this.addRecipientFormGroup.controls
+    );
 
     this.createRecipient.emit(createRecipientModel);
+  }
+
+  private parseRecipientModel(
+    recipientControls: AddRecipientFormGroup['controls']
+  ): CreateRecipientModel {
+    const bank = this.banks.find(
+      (bank) => bank.id === recipientControls.bankId.value
+    );
+
+    if (!bank) throw new Error('Bank not found');
+
+    return {
+      name: recipientControls.name.value,
+      rut: recipientControls.rut.value,
+      email: recipientControls.email.value,
+      phone: recipientControls.phone.value,
+      accountType: recipientControls.accountType.value,
+      accountNumber: recipientControls.accountNumber.value,
+      bank: { ...bank },
+    };
   }
 
   protected hasError(

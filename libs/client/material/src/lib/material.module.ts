@@ -21,6 +21,8 @@ import {
   MatSnackBarConfig,
   MatSnackBarModule,
 } from '@angular/material/snack-bar';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatRippleModule } from '@angular/material/core';
 
 @NgModule({
   imports: [
@@ -38,6 +40,8 @@ import {
     MatSelectModule,
     MatAutocompleteModule,
     MatSnackBarModule,
+    MatRadioModule,
+    MatRippleModule,
   ],
   exports: [
     LayoutModule,
@@ -54,6 +58,8 @@ import {
     MatSelectModule,
     MatAutocompleteModule,
     MatSnackBarModule,
+    MatRadioModule,
+    MatRippleModule,
   ],
   providers: [
     {

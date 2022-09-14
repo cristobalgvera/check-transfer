@@ -2,7 +2,7 @@ import { HttpException, Injectable } from '@nestjs/common';
 import { BankModel } from '@check/shared/models';
 import { HttpService } from '@nestjs/axios';
 import { catchError, map, Observable } from 'rxjs';
-import { GetBankDto } from './dto/get-bank.dto';
+import { GetBankDto } from '@check/server/shared-dtos';
 
 type BankResponse = {
   banks: BankModel[];

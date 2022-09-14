@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { AccountTypeService } from './account-type.service';
-import { GetAccountTypeDto } from './dto/get-account-type.dto';
 import { Observable } from 'rxjs';
+import { GetAccountTypeDto } from '@check/server/shared-dtos';
 
 @Controller('account-types')
 export class AccountTypeController {

@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { BankService } from './bank.service';
 import { Observable } from 'rxjs';
-import { GetBankDto } from './dto/get-bank.dto';
+import { GetBankDto } from '@check/server/shared-dtos';
 
 @Controller('banks')
 export class BankController {

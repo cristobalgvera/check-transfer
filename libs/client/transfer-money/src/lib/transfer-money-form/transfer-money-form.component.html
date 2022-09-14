@@ -1,0 +1,66 @@
+<form [formGroup]="transferMoneyFormGroup" novalidate>
+  <div class="inputs">
+    <mat-form-field hideRequiredMarker>
+      <mat-label>Recipient account</mat-label>
+      <input
+        type="text"
+        aria-label="Recipient"
+        matInput
+        required
+        [formControl]="transferMoneyFormGroup.controls.accountNumber"
+        [matAutocomplete]="recipientAutocomplete"
+      />
+      <mat-autocomplete
+        autoActiveFirstOption
+        autoSelectActiveOption
+        (optionSelected)="handleRecipientChange($event)"
+        #recipientAutocomplete="matAutocomplete"
+      >
+        <mat-option
+          *ngFor="let recipient of filteredRecipients$ | async"
+          [value]="recipient.accountNumber"
+        >
+          {{ recipient.name }}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error *ngIf="hasError('accountNumber', 'required')">
+        Recipient is required
+      </mat-error>
+    </mat-form-field>
+    <mat-card *ngIf="selectedRecipient$ | async as recipient">
+      <mat-card-title>{{ recipient.name }}</mat-card-title>
+      <mat-card-subtitle>{{ recipient.bank.name }}</mat-card-subtitle>
+      <mat-card-content>
+        <p>RUT: {{ recipient.rut }}</p>
+        <p>Email: {{ recipient.email }}</p>
+      </mat-card-content>
+    </mat-card>
+    <mat-form-field hideRequiredMarker>
+      <input
+        matInput
+        [formControl]="transferMoneyFormGroup.controls.amount"
+        type="number"
+        step="1"
+        min="0"
+        required
+      />
+      <mat-error *ngIf="hasError('amount', 'required')">
+        Amount is required
+      </mat-error>
+      <mat-error *ngIf="hasError('amount', 'min')">
+        Amount must be greater than 0
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div class="actions">
+    <button
+      mat-raised-button
+      class="submit-button"
+      color="primary"
+      type="button"
+      (click)="handleSubmit()"
+    >
+      Transfer
+    </button>
+  </div>
+</form>
