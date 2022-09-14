@@ -72,7 +72,7 @@
       "projectType": "library",
       "root": "libs/material",
       "sourceRoot": "libs/material/src",
-      "prefix": "check",
+      "prefix": "material",
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
@@ -98,7 +98,7 @@
       "projectType": "library",
       "root": "libs/shared-ui",
       "sourceRoot": "libs/shared-ui/src",
-      "prefix": "check",
+      "prefix": "app",
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
@@ -124,7 +124,7 @@
       "projectType": "application",
       "root": "apps/transfer-app",
       "sourceRoot": "apps/transfer-app/src",
-      "prefix": "app",
+      "prefix": "transfer-app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
