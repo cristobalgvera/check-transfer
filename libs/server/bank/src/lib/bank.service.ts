@@ -1,9 +1,8 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { BankModel } from '@check/shared/models';
 import { HttpService } from '@nestjs/axios';
-import { catchError, map, Observable, of } from 'rxjs';
-import { GetAccountTypeDto } from './dto/get-account-type.dto';
-import { BankDto } from './dto/bank.dto';
+import { catchError, map, Observable } from 'rxjs';
+import { GetBankDto } from './dto/get-bank.dto';
 
 type BankResponse = {
   banks: BankModel[];
@@ -15,7 +14,7 @@ export class BankService {
 
   constructor(private readonly httpService: HttpService) {}
 
-  getBanks(): Observable<BankDto[]> {
+  getBanks(): Observable<GetBankDto[]> {
     return this.httpService.get<BankResponse>(this.BANKS_URL).pipe(
       catchError((error) => {
         if (error.response)
@@ -25,18 +24,5 @@ export class BankService {
       }),
       map((response) => response.data.banks)
     );
-  }
-
-  getAccountTypes(): Observable<GetAccountTypeDto[]> {
-    return of([
-      {
-        id: '1',
-        name: 'Checking',
-      },
-      {
-        id: '2',
-        name: 'Savings',
-      },
-    ]);
   }
 }

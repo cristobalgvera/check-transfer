@@ -5,6 +5,7 @@
     "api": "apps/api",
     "material": "libs/client/material",
     "models": "libs/shared/models",
+    "server-account-type": "libs/server/account-type",
     "server-bank": "libs/server/bank",
     "server-recipient": "libs/server/recipient",
     "shared-ui": "libs/client/shared-ui",

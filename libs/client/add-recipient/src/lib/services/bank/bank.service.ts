@@ -23,7 +23,7 @@ export class BankService {
 
   getAccountTypes(): Observable<GetAccountTypeModel[]> {
     return this.httpClient
-      .get<GetAccountTypeModel[]>(`${this.BASE_URL}/account-types`)
+      .get<GetAccountTypeModel[]>(`/api/v1/account-types`)
       .pipe(
         catchError((error) => {
           console.error(error);
