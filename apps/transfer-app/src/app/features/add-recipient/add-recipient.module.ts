@@ -5,9 +5,15 @@ import { AddRecipientRoutingModule } from './add-recipient-routing.module';
 import { AddRecipientComponent } from './add-recipient.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddRecipientFormComponent } from './add-recipient-form/add-recipient-form.component';
+import { MaterialModule } from '@check/material';
 
 @NgModule({
   declarations: [AddRecipientComponent, AddRecipientFormComponent],
-  imports: [CommonModule, AddRecipientRoutingModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    AddRecipientRoutingModule,
+    ReactiveFormsModule,
+    MaterialModule,
+  ],
 })
 export class AddRecipientModule {}
