@@ -1,5 +1,6 @@
 <div class="container">
   <app-transfer-money-form
     [recipients]="(recipients$ | async) ?? []"
+    (transferMoney)="transferMoney($event)"
   ></app-transfer-money-form>
 </div>

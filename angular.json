@@ -10,6 +10,7 @@
     "server-bank": "libs/server/bank",
     "server-recipient": "libs/server/recipient",
     "server-shared-dtos": "libs/server/shared-dtos",
+    "server-transfer": "libs/server/transfer",
     "shared-ui": "libs/client/shared-ui",
     "transfer-app": "apps/transfer-app",
     "transfer-app-e2e": "apps/transfer-app-e2e",

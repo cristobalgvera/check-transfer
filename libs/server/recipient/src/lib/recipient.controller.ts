@@ -8,8 +8,8 @@ export class RecipientController {
   constructor(private readonly recipientService: RecipientService) {}
 
   @Post()
-  create(@Body() createRecipientDto: CreateRecipientDto): void {
-    this.recipientService.create(createRecipientDto);
+  create(@Body() createRecipientDto: CreateRecipientDto): Observable<void> {
+    return this.recipientService.create(createRecipientDto);
   }
 
   @Get()

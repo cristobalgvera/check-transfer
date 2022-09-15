@@ -1,8 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   Input,
   OnInit,
+  Output,
 } from '@angular/core';
 import {
   FormBuilder,
@@ -32,6 +34,8 @@ type ValidationErrorName = keyof typeof Validators;
 export class TransferMoneyFormComponent implements OnInit {
   @Input() recipients: ReadonlyArray<GetRecipientModel> = [];
 
+  @Output() transferMoney = new EventEmitter<CreateTransferModel>();
+
   protected transferMoneyFormGroup!: TransferMoneyFormGroup;
   protected filteredRecipients$!: Observable<ReadonlyArray<GetRecipientModel>>;
   protected selectedRecipient$ = new BehaviorSubject<
@@ -45,8 +49,18 @@ export class TransferMoneyFormComponent implements OnInit {
     this.createFilteredRecipients();
   }
 
+  resetForm(): void {
+    this.transferMoneyFormGroup.reset();
+    this.selectedRecipient$.next(undefined);
+  }
+
   protected handleSubmit(): void {
-    alert('Thanks!');
+    if (this.transferMoneyFormGroup.invalid)
+      return this.transferMoneyFormGroup.markAllAsTouched();
+
+    const createTransferModel = this.parseCreateTransferModel();
+
+    this.transferMoney.emit(createTransferModel);
   }
 
   protected hasError(
@@ -99,5 +113,16 @@ export class TransferMoneyFormComponent implements OnInit {
           );
         })
       );
+  }
+
+  private parseCreateTransferModel(): CreateTransferModel {
+    const { accountNumber, amount } = this.transferMoneyFormGroup.controls;
+
+    return {
+      amount: amount.value,
+      accountNumber: accountNumber.value,
+      // TODO: Use the logged in user's account number
+      origin: 'test-account',
+    };
   }
 }
