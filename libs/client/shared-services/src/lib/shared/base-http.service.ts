@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { EMPTY, Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { SnackbarService } from '@check/client/material';
 
@@ -14,26 +14,22 @@ export abstract class BaseHttpService {
     private readonly snackbarService: SnackbarService
   ) {}
 
-  protected handleError(): (error: unknown) => Observable<never> {
-    return (error: unknown) => {
-      console.error(error);
+  private handleError = (
+    httpErrorResponse: HttpErrorResponse
+  ): Observable<never> => {
+    console.error(httpErrorResponse);
 
-      if (error instanceof HttpErrorResponse) {
-        if (error.status >= 500)
-          this.snackbarService.open('Oops! Something went wrong');
-        else if (error.status >= 400)
-          this.snackbarService.open(
-            'Error! Seems like you are missing something...'
-          );
-        else this.snackbarService.open('Unknown error');
-      } else this.snackbarService.open('Unknown error');
+    if (httpErrorResponse.status >= 500)
+      this.snackbarService.open('Oops! Something went wrong');
+    else if (httpErrorResponse.status >= 400)
+      this.snackbarService.open(httpErrorResponse.error.message);
+    else this.snackbarService.open('Unknown httpErrorResponse');
 
-      return EMPTY;
-    };
-  }
+    return throwError(() => httpErrorResponse);
+  };
 
   protected get<T>(url: string, options?: HttpOptions): Observable<T> {
-    return this.http.get<T>(url, options);
+    return this.http.get<T>(url, options).pipe(catchError(this.handleError));
   }
 
   protected post<T>(
@@ -41,7 +37,9 @@ export abstract class BaseHttpService {
     body: unknown,
     options?: HttpOptions
   ): Observable<T> {
-    return this.http.post<T>(url, body, options);
+    return this.http
+      .post<T>(url, body, options)
+      .pipe(catchError(this.handleError));
   }
 
   protected put<T>(
@@ -49,10 +47,12 @@ export abstract class BaseHttpService {
     body: unknown,
     options?: HttpOptions
   ): Observable<T> {
-    return this.http.put<T>(url, body, options);
+    return this.http
+      .put<T>(url, body, options)
+      .pipe(catchError(this.handleError));
   }
 
   protected delete<T>(url: string, options?: HttpOptions): Observable<T> {
-    return this.http.delete<T>(url, options);
+    return this.http.delete<T>(url, options).pipe(catchError(this.handleError));
   }
 }

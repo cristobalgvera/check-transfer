@@ -6,6 +6,6 @@ import { Environment, environment } from '../../../environments/environment';
 })
 export class EnvironmentService {
   getEnvironment(): Environment {
-    return structuredClone(environment);
+    return environment;
   }
 }
