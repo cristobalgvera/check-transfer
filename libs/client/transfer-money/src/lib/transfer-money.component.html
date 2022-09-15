@@ -1,6 +1,8 @@
-<div class="container">
+<h1>Transfer</h1>
+
+<ng-container *ngIf="recipients$ | async as recipients">
   <app-transfer-money-form
-    [recipients]="(recipients$ | async) ?? []"
+    [recipients]="recipients"
     (transferMoney)="transferMoney($event)"
   ></app-transfer-money-form>
-</div>
+</ng-container>
