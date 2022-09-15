@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BaseHttpService } from '../shared/base-http.service';
-import { CreateTransferModel } from '@check/shared/models';
+import { CreateTransferModel, GetTransferModel } from '@check/shared/models';
 import { Observable, shareReplay } from 'rxjs';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class TransferService extends BaseHttpService {
     return this.post<never>(this.BASE_PATH, createTransferModel);
   }
 
-  getTransfers(): Observable<CreateTransferModel[]> {
-    return this.get<CreateTransferModel[]>(this.BASE_PATH).pipe(shareReplay(1));
+  getTransfers(): Observable<GetTransferModel[]> {
+    return this.get<GetTransferModel[]>(this.BASE_PATH).pipe(shareReplay(1));
   }
 }

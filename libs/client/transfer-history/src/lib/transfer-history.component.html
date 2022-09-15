@@ -1,1 +1,10 @@
 <p>transfer-history works!</p>
+
+<div>
+  <div *ngFor="let transfer of transfers$ | async">
+    <p>
+      {{ transfer.destination.name }} -
+      {{ transfer.amount | currency: 'CLP':'symbol-narrow' }}
+    </p>
+  </div>
+</div>
