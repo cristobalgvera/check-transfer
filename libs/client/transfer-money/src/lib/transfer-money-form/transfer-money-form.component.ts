@@ -15,6 +15,7 @@ import {
 import { CreateTransferModel, GetRecipientModel } from '@check/shared/models';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { BehaviorSubject, map, Observable, startWith } from 'rxjs';
+import { AuthService } from '@check/client/auth';
 
 type TransferMoneyFormGroup = FormGroup<{
   [key in keyof Omit<CreateTransferModel, 'origin'>]: FormControl<
@@ -42,7 +43,10 @@ export class TransferMoneyFormComponent implements OnInit {
     GetRecipientModel | undefined
   >(undefined);
 
-  constructor(private readonly formBuilder: FormBuilder) {}
+  constructor(
+    private readonly formBuilder: FormBuilder,
+    private readonly authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.createFormGroup();
@@ -117,12 +121,14 @@ export class TransferMoneyFormComponent implements OnInit {
 
   private parseCreateTransferModel(): CreateTransferModel {
     const { accountNumber, amount } = this.transferMoneyFormGroup.controls;
+    const currentUser = this.authService.currentUser();
+
+    if (!currentUser) throw new Error('User is not authenticated');
 
     return {
       amount: amount.value,
       accountNumber: accountNumber.value,
-      // TODO: Use the logged in user's account number
-      origin: 'test-account',
+      origin: currentUser,
     };
   }
 }

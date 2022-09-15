@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavbarLink } from '@check/client/shared-ui';
-import { EnvironmentService } from './services/environment/environment.service';
+import { EnvironmentService } from './core/services/environment/environment.service';
 
 @Component({
   selector: 'transfer-app-root',

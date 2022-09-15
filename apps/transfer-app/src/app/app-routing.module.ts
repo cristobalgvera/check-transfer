@@ -1,24 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { protectedRoutes } from './core/routes/protected.route';
+import { publicRoutes } from './core/routes/public.route';
 
 const routes: Routes = [
   {
-    path: 'add-recipient',
-    loadChildren: () =>
-      import('@check/client/add-recipient').then((m) => m.AddRecipientModule),
+    path: '',
+    redirectTo: 'transfer-money',
+    pathMatch: 'full',
   },
-  {
-    path: 'transfer-money',
-    loadChildren: () =>
-      import('@check/client/transfer-money').then((m) => m.TransferMoneyModule),
-  },
-  {
-    path: 'transfer-history',
-    loadChildren: () =>
-      import('@check/client/transfer-history').then(
-        (m) => m.TransferHistoryModule
-      ),
-  },
+  ...publicRoutes,
+  ...protectedRoutes,
 ];
 
 @NgModule({

@@ -3,6 +3,7 @@
   "projects": {
     "add-recipient": "libs/client/add-recipient",
     "api": "apps/api",
+    "client-auth": "libs/client/auth",
     "client-shared-services": "libs/client/shared-services",
     "material": "libs/client/material",
     "models": "libs/shared/models",

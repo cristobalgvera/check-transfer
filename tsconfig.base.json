@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@check/client/add-recipient": ["libs/client/add-recipient/src/index.ts"],
+      "@check/client/auth": ["libs/client/auth/src/index.ts"],
       "@check/client/material": ["libs/client/material/src/index.ts"],
       "@check/client/shared-services": [
         "libs/client/shared-services/src/index.ts"
