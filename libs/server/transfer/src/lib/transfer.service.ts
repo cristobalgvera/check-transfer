@@ -3,12 +3,16 @@ import { CreateTransferModel, TransferModel } from '@check/shared/models';
 import { RecipientService } from '@check/server/recipient';
 import { map, Observable, of, tap } from 'rxjs';
 import { GetTransferDto } from '@check/server/shared-dtos';
+import { AuthService } from '@check/server/auth';
 
 @Injectable()
 export class TransferService {
-  private readonly transfers: TransferModel[] = [];
+  private static readonly transfers: TransferModel[] = [];
 
-  constructor(private readonly recipientService: RecipientService) {}
+  constructor(
+    private readonly recipientService: RecipientService,
+    private readonly authService: AuthService
+  ) {}
 
   createTransfer(createTransferModel: CreateTransferModel): Observable<void> {
     return this.recipientService
@@ -27,14 +31,18 @@ export class TransferService {
             },
           })
         ),
-        tap((transfer) => this.transfers.push(transfer)),
+        tap((transfer) => TransferService.transfers.push(transfer)),
         // TODO: Temporal solution, should be replaced with a real transfer
         map(() => void 0)
       );
   }
 
   getTransfers(): Observable<GetTransferDto[]> {
-    return of(this.transfers).pipe(
+    const currentUserTransfers = TransferService.transfers.filter(
+      (transfer) => transfer.origin === this.authService.getCurrentUser()
+    );
+
+    return of(currentUserTransfers).pipe(
       map((transfers) =>
         transfers.map((transfer) => ({
           amount: transfer.amount,

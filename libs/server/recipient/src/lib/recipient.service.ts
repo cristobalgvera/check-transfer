@@ -7,13 +7,21 @@ import {
 } from '@check/shared/models';
 import { map, Observable, of } from 'rxjs';
 import { GetRecipientDto } from '@check/server/shared-dtos';
+import { AuthService } from '@check/server/auth';
 
 @Injectable()
 export class RecipientService {
   private static readonly recipients: RecipientModel[] = [];
 
+  constructor(private readonly authService: AuthService) {}
+
   create(createRecipientModel: CreateRecipientModel): Observable<void> {
-    const recipient = { ...createRecipientModel };
+    const currentUser = this.authService.getCurrentUser();
+
+    const recipient: RecipientModel = {
+      ...createRecipientModel,
+      origin: currentUser,
+    };
 
     RecipientService.recipients.push(recipient);
 
@@ -22,7 +30,11 @@ export class RecipientService {
   }
 
   findAll(): Observable<GetRecipientDto[]> {
-    return of(RecipientService.recipients).pipe(
+    const currentUserRecipients = RecipientService.recipients.filter(
+      (recipient) => recipient.origin === this.authService.getCurrentUser()
+    );
+
+    return of(currentUserRecipients).pipe(
       map((recipients) =>
         recipients.map((recipient) => ({
           bank: recipient.bank,
@@ -40,7 +52,9 @@ export class RecipientService {
     accountNumber: CreateTransferModelAccountNumber
   ): Observable<GetRecipientModel> {
     const recipient = RecipientService.recipients.find(
-      (recipient) => recipient.accountNumber === accountNumber
+      (recipient) =>
+        recipient.accountNumber === accountNumber &&
+        recipient.origin === this.authService.getCurrentUser()
     );
 
     if (!recipient) throw new NotFoundException('Recipient not found');

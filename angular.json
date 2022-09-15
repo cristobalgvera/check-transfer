@@ -8,6 +8,7 @@
     "material": "libs/client/material",
     "models": "libs/shared/models",
     "server-account-type": "libs/server/account-type",
+    "server-auth": "libs/server/auth",
     "server-bank": "libs/server/bank",
     "server-recipient": "libs/server/recipient",
     "server-shared-dtos": "libs/server/shared-dtos",
