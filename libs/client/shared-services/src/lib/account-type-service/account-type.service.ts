@@ -9,7 +9,14 @@ import { BaseHttpService } from '../shared/base-http.service';
 export class AccountTypeService extends BaseHttpService {
   protected readonly BASE_PATH = '/api/v1/account-types';
 
+  private accountTypes$?: Observable<GetAccountTypeModel[]>;
+
   getAccountTypes(): Observable<GetAccountTypeModel[]> {
-    return this.get<GetAccountTypeModel[]>(this.BASE_PATH).pipe(shareReplay(1));
+    if (!this.accountTypes$)
+      this.accountTypes$ = this.get<GetAccountTypeModel[]>(this.BASE_PATH).pipe(
+        shareReplay(1)
+      );
+
+    return this.accountTypes$;
   }
 }

@@ -9,7 +9,12 @@ import { BaseHttpService } from '../shared/base-http.service';
 export class BankService extends BaseHttpService {
   protected readonly BASE_PATH = '/api/v1/banks';
 
+  private banks$?: Observable<BankModel[]>;
+
   getBanks(): Observable<BankModel[]> {
-    return this.get<BankModel[]>(this.BASE_PATH).pipe(shareReplay(1));
+    if (!this.banks$)
+      this.banks$ = this.get<BankModel[]>(this.BASE_PATH).pipe(shareReplay(1));
+
+    return this.banks$;
   }
 }
