@@ -1,20 +1,27 @@
-<mat-card class="login-container">
-  <mat-card-title>Login</mat-card-title>
+<div class="login-container">
+  <mat-card class="login-card">
+    <mat-card-title>Login</mat-card-title>
 
-  <form novalidate [formGroup]="loginFormGroup" (keyup.enter)="login()">
-    <div class="inputs">
-      <mat-form-field>
-        <input matInput [formControl]="loginFormGroup.controls.username" />
-        <mat-error *ngIf="hasError('username', 'required')">
-          Username is required
-        </mat-error>
-      </mat-form-field>
-    </div>
+    <form novalidate [formGroup]="loginFormGroup" (keyup.enter)="login()">
+      <div class="inputs">
+        <mat-form-field>
+          <input matInput [formControl]="loginFormGroup.controls.username" />
+          <mat-error *ngIf="hasError('username', 'required')">
+            Username is required
+          </mat-error>
+        </mat-form-field>
+      </div>
 
-    <div class="actions">
-      <button type="button" mat-raised-button color="primary" (click)="login()">
-        Login
-      </button>
-    </div>
-  </form>
-</mat-card>
+      <div class="actions">
+        <button
+          type="button"
+          mat-raised-button
+          color="primary"
+          (click)="login()"
+        >
+          Login
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>

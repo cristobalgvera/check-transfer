@@ -7,8 +7,6 @@
 }
 
 .container {
-  display: grid;
-  place-content: center;
   width: 70%;
 
   @media (max-width: 768px) {

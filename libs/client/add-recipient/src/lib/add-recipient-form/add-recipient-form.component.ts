@@ -21,11 +21,13 @@ import {
 
 type AddRecipientFormGroup = FormGroup<
   {
-    [key in keyof Omit<CreateRecipientModel, 'bank'>]: FormControl<
-      CreateRecipientModel[key]
-    >;
+    [key in keyof Omit<
+      CreateRecipientModel,
+      'bank' | 'accountType'
+    >]: FormControl<CreateRecipientModel[key]>;
   } & {
     bankId: FormControl<CreateRecipientModel['bank']['id']>;
+    accountTypeId: FormControl<CreateRecipientModel['accountType']['id']>;
   }
 >;
 
@@ -55,7 +57,7 @@ export class AddRecipientFormComponent implements OnInit {
       email: this.commonControl('', Validators.email),
       phone: this.commonControl('', Validators.pattern(/^\+?[0-9]{8,11}$/)),
       bankId: this.commonControl(''),
-      accountType: this.commonControl(''),
+      accountTypeId: this.commonControl(''),
       accountNumber: this.commonControl('', Validators.pattern(/^[0-9]+$/)),
     });
   }
@@ -84,14 +86,20 @@ export class AddRecipientFormComponent implements OnInit {
 
     if (!bank) throw new Error('Bank not found');
 
+    const accountType = this.accountTypes.find(
+      (accountType) => accountType.id === recipientControls.accountTypeId.value
+    );
+
+    if (!accountType) throw new Error('Account type not found');
+
     return {
       name: recipientControls.name.value,
       rut: recipientControls.rut.value,
       email: recipientControls.email.value,
       phone: recipientControls.phone.value,
-      accountType: recipientControls.accountType.value,
       accountNumber: recipientControls.accountNumber.value,
       bank: { ...bank },
+      accountType: { ...accountType },
     };
   }
 

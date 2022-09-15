@@ -1,4 +1,5 @@
 import { BankModel } from '../bank';
+import { AccountTypeModel } from '../account-type';
 
 export interface RecipientModel {
   origin: string;
@@ -7,6 +8,6 @@ export interface RecipientModel {
   email: string;
   phone: string;
   bank: BankModel;
-  accountType: string;
+  accountType: AccountTypeModel;
   accountNumber: string;
 }

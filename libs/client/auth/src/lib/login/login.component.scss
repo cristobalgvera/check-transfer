@@ -1,4 +1,9 @@
 .login-container {
+  display: grid;
+  place-content: center;
+}
+
+.login-card {
   padding: 2rem 2.5rem;
   width: 30rem;
 

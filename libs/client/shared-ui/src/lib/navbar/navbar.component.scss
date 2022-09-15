@@ -2,6 +2,12 @@
   padding: 0 2rem;
 }
 
+.home-button {
+  display: grid;
+  place-content: center;
+  height: 100%;
+}
+
 .space {
   flex: 1 1 auto;
 }

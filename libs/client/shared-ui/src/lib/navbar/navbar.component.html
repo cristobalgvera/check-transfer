@@ -1,7 +1,9 @@
 <header class="container">
   <ng-container *ngIf="{ isSmallScreen: isSmallScreen$ | async } as aux">
     <mat-toolbar color="primary" class="toolbar">
-      <h1>{{ appName }}</h1>
+      <a mat-button class="home-button" routerLink="">
+        <h1>{{ appName }}</h1>
+      </a>
       <span class="space"></span>
       <div class="nav-items" *ngIf="!aux.isSmallScreen; else navMenu">
         <a
