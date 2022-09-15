@@ -1,10 +1,7 @@
-<p>transfer-history works!</p>
+<h1>Transfer History</h1>
 
-<div>
-  <div *ngFor="let transfer of transfers$ | async">
-    <p>
-      {{ transfer.destination.name }} -
-      {{ transfer.amount | currency: 'CLP':'symbol-narrow' }}
-    </p>
-  </div>
-</div>
+<ng-container *ngIf="transfers$ | async as transfers">
+  <app-transfer-history-table
+    [transfers]="transfers"
+  ></app-transfer-history-table>
+</ng-container>

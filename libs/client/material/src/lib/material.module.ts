@@ -23,6 +23,7 @@ import {
 } from '@angular/material/snack-bar';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatRippleModule } from '@angular/material/core';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   imports: [
@@ -42,6 +43,7 @@ import { MatRippleModule } from '@angular/material/core';
     MatSnackBarModule,
     MatRadioModule,
     MatRippleModule,
+    MatPaginatorModule,
   ],
   exports: [
     LayoutModule,
@@ -60,6 +62,7 @@ import { MatRippleModule } from '@angular/material/core';
     MatSnackBarModule,
     MatRadioModule,
     MatRippleModule,
+    MatPaginatorModule,
   ],
   providers: [
     {
