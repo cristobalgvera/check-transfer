@@ -7,13 +7,15 @@ import {
 } from 'class-validator';
 import { CreateBankDto } from '../bank/create-bank.dto';
 import { Type } from 'class-transformer';
+import { CreateAccountTypeDto } from '../account-type/create-account-type.dto';
 
 export class CreateRecipientDto implements CreateRecipientModel {
   @IsNumberString()
   accountNumber!: string;
 
-  @IsNotEmpty()
-  accountType!: string;
+  @ValidateNested()
+  @Type(() => CreateAccountTypeDto)
+  accountType!: CreateAccountTypeDto;
 
   @ValidateNested()
   @Type(() => CreateBankDto)

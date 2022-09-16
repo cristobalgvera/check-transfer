@@ -71,7 +71,7 @@
       <mat-option disabled>Select one</mat-option>
       <mat-option
         *ngFor="let accountType of accountTypes"
-        [value]="accountType.id"
+        [value]="accountType._id"
       >
         {{ accountType.name }}
       </mat-option>

@@ -27,7 +27,7 @@ type AddRecipientFormGroup = FormGroup<
     >]: FormControl<CreateRecipientModel[key]>;
   } & {
     bankId: FormControl<CreateRecipientModel['bank']['id']>;
-    accountTypeId: FormControl<CreateRecipientModel['accountType']['id']>;
+    accountTypeId: FormControl<CreateRecipientModel['accountType']['_id']>;
   }
 >;
 
@@ -87,7 +87,7 @@ export class AddRecipientFormComponent implements OnInit {
     if (!bank) throw new Error('Bank not found');
 
     const accountType = this.accountTypes.find(
-      (accountType) => accountType.id === recipientControls.accountTypeId.value
+      (accountType) => accountType._id === recipientControls.accountTypeId.value
     );
 
     if (!accountType) throw new Error('Account type not found');

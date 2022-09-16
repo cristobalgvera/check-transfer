@@ -1,3 +1,3 @@
-import { AccountTypeModel } from '@check/shared/models';
+import { AccountTypeModel } from './account-type.model';
 
-export type GetAccountTypeModel = Pick<AccountTypeModel, 'id' | 'name'>;
+export type GetAccountTypeModel = Pick<AccountTypeModel, '_id' | 'name'>;

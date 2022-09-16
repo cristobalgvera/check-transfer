@@ -1,19 +1,18 @@
 import { Injectable } from '@nestjs/common';
-import { Observable, of } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { GetAccountTypeDto } from '@check/server/shared-dtos';
+import { InjectModel } from '@nestjs/mongoose';
+import { AccountType, AccountTypeDocument } from './account-type.schema';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class AccountTypeService {
+  constructor(
+    @InjectModel(AccountType.name)
+    private readonly accountTypeModel: Model<AccountTypeDocument>
+  ) {}
+
   getAccountTypes(): Observable<GetAccountTypeDto[]> {
-    return of([
-      {
-        id: '1',
-        name: 'Checking',
-      },
-      {
-        id: '2',
-        name: 'Savings',
-      },
-    ]);
+    return from(this.accountTypeModel.find().exec());
   }
 }
