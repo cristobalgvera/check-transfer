@@ -56,6 +56,7 @@ export class TransferService {
             destination: 1,
           }
         )
+        .populate('destination.accountType')
         .exec()
     );
   }
