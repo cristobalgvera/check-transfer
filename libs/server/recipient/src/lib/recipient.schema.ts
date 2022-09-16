@@ -1,11 +1,10 @@
 import { BankModel, RecipientModel } from '@check/shared/models';
-import { Prop, raw, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
 import { AccountType } from '@check/server/account-type';
+import { BankSchema } from '@check/server/shared-schemas';
 
 export type RecipientDocument = Recipient & Document;
-
-type Bank = Record<keyof BankModel, unknown>;
 
 @Schema()
 export class Recipient implements RecipientModel {
@@ -22,12 +21,7 @@ export class Recipient implements RecipientModel {
   })
   accountType!: AccountType;
 
-  @Prop(
-    raw(<Bank>{
-      id: { type: String, required: true },
-      name: { type: String, required: true },
-    })
-  )
+  @Prop({ required: true, type: BankSchema })
   bank!: BankModel;
 
   @Prop({ required: true })

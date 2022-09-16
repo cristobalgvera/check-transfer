@@ -12,6 +12,7 @@
     "server-bank": "libs/server/bank",
     "server-recipient": "libs/server/recipient",
     "server-shared-dtos": "libs/server/shared-dtos",
+    "server-shared-schemas": "libs/server/shared-schemas",
     "server-transfer": "libs/server/transfer",
     "shared-ui": "libs/client/shared-ui",
     "transfer-app": "apps/transfer-app",
