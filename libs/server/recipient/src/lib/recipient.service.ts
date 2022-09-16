@@ -40,21 +40,20 @@ export class RecipientService {
   findAll(): Observable<GetRecipientDto[]> {
     return from(
       this.recipientModel
-        .find({
-          origin: this.authService.getCurrentUser(),
-        })
+        .find(
+          {
+            origin: this.authService.getCurrentUser(),
+          },
+          {
+            bank: 1,
+            accountNumber: 1,
+            accountType: 1,
+            name: 1,
+            rut: 1,
+            email: 1,
+          }
+        )
         .exec()
-    ).pipe(
-      map((recipients) =>
-        recipients.map((recipient) => ({
-          bank: recipient.bank,
-          accountNumber: recipient.accountNumber,
-          accountType: recipient.accountType,
-          name: recipient.name,
-          rut: recipient.rut,
-          email: recipient.email,
-        }))
-      )
     );
   }
 
@@ -70,7 +69,8 @@ export class RecipientService {
         .exec()
     ).pipe(
       map((recipient) => {
-        if (!recipient) throw new Error('Recipient not found');
+        if (!recipient)
+          throw new HttpException('Recipient not found', HttpStatus.NOT_FOUND);
 
         return recipient;
       })

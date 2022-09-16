@@ -128,7 +128,6 @@ export class TransferMoneyFormComponent implements OnInit {
     return {
       amount: amount.value,
       accountNumber: accountNumber.value,
-      origin: currentUser,
     };
   }
 }

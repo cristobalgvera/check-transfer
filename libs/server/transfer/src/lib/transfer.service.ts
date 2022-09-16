@@ -1,27 +1,32 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateTransferModel, TransferModel } from '@check/shared/models';
 import { RecipientService } from '@check/server/recipient';
-import { map, Observable, of, tap } from 'rxjs';
+import { catchError, from, map, Observable, switchMap } from 'rxjs';
 import { GetTransferDto } from '@check/server/shared-dtos';
 import { AuthService } from '@check/server/auth';
+import { InjectModel } from '@nestjs/mongoose';
+import { Transfer, TransferDocument } from './transfer.schema';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class TransferService {
-  private static readonly transfers: TransferModel[] = [];
-
   constructor(
+    @InjectModel(Transfer.name)
+    private readonly transferModel: Model<TransferDocument>,
     private readonly recipientService: RecipientService,
     private readonly authService: AuthService
   ) {}
 
-  createTransfer(createTransferModel: CreateTransferModel): Observable<void> {
+  createTransfer(
+    createTransferModel: CreateTransferModel
+  ): Observable<Transfer> {
     return this.recipientService
       .getRecipient(createTransferModel.accountNumber)
       .pipe(
         map(
           (recipient): TransferModel => ({
             amount: createTransferModel.amount,
-            origin: createTransferModel.origin,
+            origin: this.authService.getCurrentUser(),
             destination: {
               name: recipient.name,
               rut: recipient.rut,
@@ -31,24 +36,27 @@ export class TransferService {
             },
           })
         ),
-        tap((transfer) => TransferService.transfers.push(transfer)),
-        // TODO: Temporal solution, should be replaced with a real transfer
-        map(() => void 0)
+        switchMap((transfer) => from(this.transferModel.create(transfer))),
+        catchError((error) => {
+          throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+        }),
+        map((transfer) => ({ ...transfer.toObject() }))
       );
   }
 
   getTransfers(): Observable<GetTransferDto[]> {
-    const currentUserTransfers = TransferService.transfers.filter(
-      (transfer) => transfer.origin === this.authService.getCurrentUser()
-    );
-
-    return of(currentUserTransfers).pipe(
-      map((transfers) =>
-        transfers.map((transfer) => ({
-          amount: transfer.amount,
-          destination: { ...transfer.destination },
-        }))
-      )
+    return from(
+      this.transferModel
+        .find(
+          {
+            origin: this.authService.getCurrentUser(),
+          },
+          {
+            amount: 1,
+            destination: 1,
+          }
+        )
+        .exec()
     );
   }
 }
