@@ -19,6 +19,11 @@ services:
       - 8081:8081
     environment:
       - ME_CONFIG_MONGODB_SERVER=mongodb
+  mongo_seed:
+    container_name: mongo_seed
+    build: .
+    depends_on:
+      - mongodb
 
 volumes:
   data:
