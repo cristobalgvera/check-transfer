@@ -1,40 +1,50 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import {
   CreateRecipientModel,
   CreateTransferModelAccountNumber,
   GetRecipientModel,
-  RecipientModel,
 } from '@check/shared/models';
-import { map, Observable, of } from 'rxjs';
+import { catchError, from, map, Observable } from 'rxjs';
 import { GetRecipientDto } from '@check/server/shared-dtos';
 import { AuthService } from '@check/server/auth';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { Recipient, RecipientDocument } from './recipient.schema';
 
 @Injectable()
 export class RecipientService {
-  private static readonly recipients: RecipientModel[] = [];
+  constructor(
+    @InjectModel(Recipient.name)
+    private readonly recipientModel: Model<RecipientDocument>,
+    private readonly authService: AuthService
+  ) {}
 
-  constructor(private readonly authService: AuthService) {}
-
-  create(createRecipientModel: CreateRecipientModel): Observable<void> {
+  create(createRecipientModel: CreateRecipientModel): Observable<Recipient> {
     const currentUser = this.authService.getCurrentUser();
 
-    const recipient: RecipientModel = {
-      ...createRecipientModel,
-      origin: currentUser,
-    };
-
-    RecipientService.recipients.push(recipient);
-
-    // TODO: Temporal solution, should be replaced with a real insertion
-    return of(void 0);
+    return from(
+      this.recipientModel.create({
+        ...createRecipientModel,
+        origin: currentUser,
+      })
+    ).pipe(
+      catchError((error) => {
+        throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+      }),
+      map((recipient) => ({
+        ...recipient.toObject(),
+      }))
+    );
   }
 
   findAll(): Observable<GetRecipientDto[]> {
-    const currentUserRecipients = RecipientService.recipients.filter(
-      (recipient) => recipient.origin === this.authService.getCurrentUser()
-    );
-
-    return of(currentUserRecipients).pipe(
+    return from(
+      this.recipientModel
+        .find({
+          origin: this.authService.getCurrentUser(),
+        })
+        .exec()
+    ).pipe(
       map((recipients) =>
         recipients.map((recipient) => ({
           bank: recipient.bank,
@@ -51,14 +61,19 @@ export class RecipientService {
   getRecipient(
     accountNumber: CreateTransferModelAccountNumber
   ): Observable<GetRecipientModel> {
-    const recipient = RecipientService.recipients.find(
-      (recipient) =>
-        recipient.accountNumber === accountNumber &&
-        recipient.origin === this.authService.getCurrentUser()
+    return from(
+      this.recipientModel
+        .findOne({
+          origin: this.authService.getCurrentUser(),
+          accountNumber,
+        })
+        .exec()
+    ).pipe(
+      map((recipient) => {
+        if (!recipient) throw new Error('Recipient not found');
+
+        return recipient;
+      })
     );
-
-    if (!recipient) throw new NotFoundException('Recipient not found');
-
-    return of(recipient);
   }
 }
