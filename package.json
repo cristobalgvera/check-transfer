@@ -7,6 +7,7 @@
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2020 browser module main",
     "serve:all": "nx run-many --target=serve --all --parallel",
     "build:all": "nx run-many --target=build --all --parallel",
+    "heroku-postbuild": "nx build $PROJECT_NAME --prod",
     "test": "nx test",
     "prepare": "husky install",
     "serve:api": "nx serve api",
