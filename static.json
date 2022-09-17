@@ -1,0 +1,11 @@
+{
+  "root": "dist/apps/transfer-app/",
+  "routes": {
+    "/**/*.html": "index.html"
+  },
+  "proxies": {
+    "/api/": {
+      "origin": "https://${API_APP_NAME}.herokuapp.com"
+    }
+  }
+}
