@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavbarLink } from '@check/client/shared-ui';
-import { EnvironmentService } from './core/services/environment/environment.service';
+import { Environment } from '@check/client/core';
 
 @Component({
   selector: 'transfer-app-root',
@@ -8,12 +8,14 @@ import { EnvironmentService } from './core/services/environment/environment.serv
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  protected appName = this.environmentService.getEnvironment().title;
-  protected links: NavbarLink[] = [
+  protected readonly appName: string;
+  protected readonly links: NavbarLink[] = [
     { path: '/transfer-money', title: 'Transfer', icon: 'currency_exchange' },
     { path: '/add-recipient', title: 'Add Recipient', icon: 'person_add' },
     { path: '/transfer-history', title: 'History', icon: 'payments' },
   ];
 
-  constructor(private readonly environmentService: EnvironmentService) {}
+  constructor(private readonly environment: Environment) {
+    this.appName = environment.title;
+  }
 }

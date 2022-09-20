@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedUiModule } from '@check/client/shared-ui';
 import { httpInterceptorProviders } from './core/interceptors/http-request.interceptor';
+import { Environment } from '@check/client/core';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,7 +19,13 @@ import { httpInterceptorProviders } from './core/interceptors/http-request.inter
     SharedUiModule,
     BrowserAnimationsModule,
   ],
-  providers: [httpInterceptorProviders],
+  providers: [
+    httpInterceptorProviders,
+    {
+      provide: Environment,
+      useValue: environment,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
