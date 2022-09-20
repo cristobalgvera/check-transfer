@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BankModel } from '@check/shared/models';
 import { Observable, shareReplay } from 'rxjs';
-import { BaseHttpService } from '../shared/base-http.service';
+import { BaseHttpService } from '@check/client/core';
 
 @Injectable({
   providedIn: 'root',

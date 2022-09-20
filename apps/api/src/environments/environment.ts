@@ -4,5 +4,3 @@ export const environment = {
     uri: process.env.MONGO_URI,
   },
 };
-
-export type Environment = typeof environment;
