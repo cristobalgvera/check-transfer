@@ -4,6 +4,7 @@
     "add-recipient": "libs/client/add-recipient",
     "api": "apps/api",
     "client-auth": "libs/client/auth",
+    "client-core": "libs/client/core",
     "client-shared-services": "libs/client/shared-services",
     "material": "libs/client/material",
     "models": "libs/shared/models",
