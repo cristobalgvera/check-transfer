@@ -1,21 +1,25 @@
 .login-container {
-  display: grid;
-  place-content: center;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .login-card {
   padding: 2rem 2.5rem;
-  width: 30rem;
 
-  @media (max-width: 768px) {
-    width: 100%;
+  @media (min-width: 768px) {
+    width: 30rem;
   }
 }
 
 .inputs {
-  display: grid;
-  grid-template-columns: minmax(300px, 1fr);
-  grid-gap: 1rem;
+  display: flex;
+  flex-flow: column;
+
+  .mat-form-field {
+    width: 100%;
+  }
 }
 
 .actions {
