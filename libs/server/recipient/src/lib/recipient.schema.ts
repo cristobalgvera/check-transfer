@@ -11,7 +11,7 @@ export class Recipient implements RecipientModel {
   @Prop({ required: true })
   origin!: string;
 
-  @Prop({ required: true, unique: true })
+  @Prop({ required: true })
   accountNumber!: string;
 
   @Prop({
@@ -38,3 +38,5 @@ export class Recipient implements RecipientModel {
 }
 
 export const RecipientSchema = SchemaFactory.createForClass(Recipient);
+
+RecipientSchema.index({ accountNumber: 1, origin: 1 }, { unique: true });
