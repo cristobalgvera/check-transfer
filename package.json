@@ -12,7 +12,9 @@
     "test": "nx test",
     "prepare": "husky install",
     "serve:api": "nx serve api",
-    "serve:app": "nx serve transfer-app"
+    "serve:app": "nx serve transfer-app",
+    "build:api": "nx build api",
+    "build:app": "nx build transfer-app"
   },
   "private": true,
   "dependencies": {
