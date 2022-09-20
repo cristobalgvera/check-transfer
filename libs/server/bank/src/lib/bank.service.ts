@@ -22,7 +22,12 @@ export class BankService {
 
         throw new HttpException(error.message, 500);
       }),
-      map((response) => response.data.banks)
+      map(
+        (response) =>
+          response?.data?.banks ?? [
+            { id: '-1', name: 'Default Bank (Banks API is down)' },
+          ]
+      )
     );
   }
 }
