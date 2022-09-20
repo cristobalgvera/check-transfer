@@ -10,7 +10,7 @@ import {
   TransferService,
 } from '@check/client/shared-services';
 import { CreateTransferModel, GetRecipientModel } from '@check/shared/models';
-import { finalize, Observable, Subject, takeUntil } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { TransferMoneyFormComponent } from './transfer-money-form/transfer-money-form.component';
 import { SnackbarService } from '@check/client/material';
 
@@ -45,13 +45,10 @@ export class TransferMoneyComponent implements OnInit, OnDestroy {
   protected transferMoney(createTransferModel: CreateTransferModel): void {
     this.transferService
       .createTransfer(createTransferModel)
-      .pipe(
-        finalize(() => {
-          this.snackbarService.open('Transfer created successfully');
-          this.transferMoneyFormComponent.resetForm();
-        }),
-        takeUntil(this.destroy$)
-      )
-      .subscribe();
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.snackbarService.open('Transfer created successfully');
+        this.transferMoneyFormComponent.resetForm();
+      });
   }
 }

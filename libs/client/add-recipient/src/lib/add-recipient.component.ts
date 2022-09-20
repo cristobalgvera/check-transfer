@@ -1,10 +1,10 @@
-import { Component, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import {
   AccountTypeService,
   BankService,
   RecipientService,
 } from '@check/client/shared-services';
-import { finalize, Observable, Subject, takeUntil } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import {
   BankModel,
   CreateRecipientModel,
@@ -18,22 +18,24 @@ import { AddRecipientFormComponent } from './add-recipient-form/add-recipient-fo
   templateUrl: './add-recipient.component.html',
   styleUrls: ['./add-recipient.component.scss'],
 })
-export class AddRecipientComponent implements OnDestroy {
+export class AddRecipientComponent implements OnInit, OnDestroy {
   @ViewChild(AddRecipientFormComponent)
   private addRecipientForm!: AddRecipientFormComponent;
 
   private readonly destroy$ = new Subject<boolean>();
-  protected readonly banks$: Observable<BankModel[]>;
-  protected readonly accountTypes$: Observable<GetAccountTypeModel[]>;
+  protected banks$!: Observable<BankModel[]>;
+  protected accountTypes$!: Observable<GetAccountTypeModel[]>;
 
   constructor(
     private readonly bankService: BankService,
     private readonly accountTypeService: AccountTypeService,
     private readonly recipientService: RecipientService,
     private readonly snackbarService: SnackbarService
-  ) {
-    this.banks$ = bankService.getBanks();
-    this.accountTypes$ = accountTypeService.getAccountTypes();
+  ) {}
+
+  ngOnInit(): void {
+    this.banks$ = this.bankService.getBanks();
+    this.accountTypes$ = this.accountTypeService.getAccountTypes();
   }
 
   ngOnDestroy(): void {
@@ -44,13 +46,10 @@ export class AddRecipientComponent implements OnDestroy {
   protected createRecipient(createRecipientModel: CreateRecipientModel) {
     this.recipientService
       .createRecipient(createRecipientModel)
-      .pipe(
-        finalize(() => {
-          this.addRecipientForm.resetForm();
-          this.snackbarService.open('Recipient created successfully');
-        }),
-        takeUntil(this.destroy$)
-      )
-      .subscribe();
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.addRecipientForm.resetForm();
+        this.snackbarService.open('Recipient created successfully');
+      });
   }
 }
