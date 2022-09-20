@@ -1,8 +1,8 @@
 const fs = require('fs');
 
 const BASE_PATH = './apps/transfer-app/src/environments';
-const ENCODED_FILE_PATH = `${BASE_PATH}/environment.encoded.ts`;
-const DECODED_FILE_PATH = `${BASE_PATH}/environment.prod.ts`;
+const TEMPLATE_FILE_PATH = `${BASE_PATH}/environment.template.ts`;
+const RESULT_FILE_PATH = `${BASE_PATH}/environment.prod.ts`;
 
 const replacements = [
   {
@@ -12,19 +12,20 @@ const replacements = [
 ];
 
 fs.readFile(
-  ENCODED_FILE_PATH,
+  TEMPLATE_FILE_PATH,
   { encoding: 'utf-8' },
-  (readError, encodedFile) => {
+  (readError, templateFile) => {
     if (readError) return console.log(readError);
 
-    const result = replacements.reduce(
-      (file, { pattern, replacement }) => file.replace(pattern, replacement),
-      encodedFile
+    const resultFile = replacements.reduce(
+      (encodedFile, { pattern, replacement }) =>
+        encodedFile.replace(pattern, replacement),
+      templateFile
     );
 
     fs.writeFile(
-      DECODED_FILE_PATH,
-      result,
+      RESULT_FILE_PATH,
+      resultFile,
       { encoding: 'utf-8' },
       (writeError) => {
         console.log(writeError || 'Environment file saved');

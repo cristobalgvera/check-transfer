@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { SnackbarService } from '@check/client/material';
+import { Environment } from '../config';
 
 type HttpOptions = Parameters<HttpClient['get']>[1];
 
@@ -11,7 +12,8 @@ export abstract class BaseHttpService {
 
   constructor(
     private readonly http: HttpClient,
-    private readonly snackbarService: SnackbarService
+    private readonly snackbarService: SnackbarService,
+    private readonly environment: Environment
   ) {}
 
   private handleError = (
@@ -29,7 +31,9 @@ export abstract class BaseHttpService {
   };
 
   protected get<T>(url: string, options?: HttpOptions): Observable<T> {
-    return this.http.get<T>(url, options).pipe(catchError(this.handleError));
+    return this.http
+      .get<T>(this.formatUrl(url), options)
+      .pipe(catchError(this.handleError));
   }
 
   protected post<T>(
@@ -38,7 +42,7 @@ export abstract class BaseHttpService {
     options?: HttpOptions
   ): Observable<T> {
     return this.http
-      .post<T>(url, body, options)
+      .post<T>(this.formatUrl(url), body, options)
       .pipe(catchError(this.handleError));
   }
 
@@ -48,11 +52,17 @@ export abstract class BaseHttpService {
     options?: HttpOptions
   ): Observable<T> {
     return this.http
-      .put<T>(url, body, options)
+      .put<T>(this.formatUrl(url), body, options)
       .pipe(catchError(this.handleError));
   }
 
   protected delete<T>(url: string, options?: HttpOptions): Observable<T> {
-    return this.http.delete<T>(url, options).pipe(catchError(this.handleError));
+    return this.http
+      .delete<T>(this.formatUrl(url), options)
+      .pipe(catchError(this.handleError));
+  }
+
+  private formatUrl(url: string): string {
+    return url.startsWith('/') ? this.environment.apiUrl + url : url;
   }
 }
